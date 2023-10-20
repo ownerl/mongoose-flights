@@ -17,6 +17,11 @@ table {
   width: 100%;
 }
 
+thead, tfoot {
+  background-color: gray;
+  color: white;
+}
+
 th, td {
   padding: 15px;
 }

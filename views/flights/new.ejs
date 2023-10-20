@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+    <h2>Add Flight</h2>
+    <form action="/flights" method="POST">
+    <table>
+        <thead>
+            <tr>
+                <th>Airline</th>
+                <th>Airport</th>
+                <th>Flight Number</th>
+                <th>Departure</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                        <select name="airline">
+                            <% airlines.forEach((item) => { %>
+                            <option value="<%= item %>"><%= item %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="airport">
+                            <% airports.forEach((item) => { %>
+                            <option value="<%= item %>"><%= item %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                    <td><input type="number" name="flightNo" required></td>
+                    <td><input type="text" name="departs"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button type="submit">Add Flight</button>
+    </form>
+        <%- include('../partials/footer') %>
