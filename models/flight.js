@@ -5,6 +5,16 @@ const Schema = mongoose.Schema;
 const airlines = ['American', 'Southwest', 'United', 'Lufthansa', 'Air Canada', 'Turkish', 'Fly Emirates', 'Westjet', 'Air New Zealand', 'Air Astana'];
 const airports = ['AUS', 'DFW', 'LAX', 'YYG', 'YEG', 'SAN', 'DEN'];
 
+const destinationSchema = new Schema({
+    airport: {
+        type: String,
+        enum: airports,
+    },
+    arrival: {
+        type: Date,
+    }
+});
+
 const flightSchema = new Schema({
     airline: {
         type: String,
@@ -20,11 +30,11 @@ const flightSchema = new Schema({
         min: 1,
         max: 9999
     },
-    departs: {
-        type: Date,
-        default: (Date.now() * 60000 * 60 * 24 * 365)
-    }
-})
+    departs: Date,
+    destinations: [destinationSchema]
+});
+
+
 
 module.exports = {
     airlines,

@@ -11,26 +11,26 @@
             </tr>
         </thead>
         <tbody>
-                <tr>
-                    <td>
-                        <select name="airline">
-                            <% airlines.forEach((item) => { %>
-                            <option value="<%= item %>"><%= item %></option>
-                            <% }); %>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="airport">
-                            <% airports.forEach((item) => { %>
-                            <option value="<%= item %>"><%= item %></option>
-                            <% }); %>
-                        </select>
-                    </td>
-                    <td><input type="number" name="flightNo" required></td>
-                    <td><input type="text" name="departs"></td>
-                </tr>
-            </tbody>
-        </table>
+            <tr>
+                <td>
+                    <select name="airline">
+                        <% airlines.forEach((item) => { %>
+                        <option value="<%= item %>"><%= item %></option>
+                        <% }); %>
+                    </select>
+                </td>
+                <td>
+                    <select name="airport">
+                        <% airports.forEach((item) => { %>
+                        <option value="<%= item %>"><%= item %></option>
+                        <% }); %>
+                    </select>
+                </td>
+                <td><input type="number" name="flightNo" required></td>
+                <td><input type="datetime-local" name="departs" autocomplete="on" required value="<%- testdefined.toISOString(); %>"></td>
+            </tr>
+        </tbody>
+    </table>
         <br>
         <button type="submit">Add Flight</button>
     </form>

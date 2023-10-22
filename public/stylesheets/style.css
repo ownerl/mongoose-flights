@@ -25,3 +25,18 @@ thead, tfoot {
 th, td {
   padding: 15px;
 }
+
+.details {
+  border-radius: 4px;
+  background-color: gray;
+  padding: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  transition: 0.3s;
+}
+
+.details:hover {
+  background-color: lightgray;
+  color: black;
+}
