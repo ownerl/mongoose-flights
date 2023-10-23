@@ -29,12 +29,12 @@
         </table>
         <form action="/flights/<%= flight._id %>/destinations" method="POST">
                 <select name="airport">
-                    <option selected="true" disabled="disabled">Choose Airport</option> 
+                    <option selected="true" disabled="disabled">Nowhere</option> 
                     <% airports.forEach((item) => { %>
                         <option value="<%= item %>"><%= item %></option>
                     <% }); %>
                 </select>
-                <input type="datetime-local" required name="arrival">
+                <input type="datetime-local" required name="arrival" value="<%= destinationDate %>">
             <button type="submit">Add Destination</button>
         </form>
     </section>

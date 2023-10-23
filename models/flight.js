@@ -12,7 +12,8 @@ const destinationSchema = new Schema({
     },
     arrival: {
         type: Date,
-    }
+        default: new Date((60000 * 60 * 24 * 365) + Date.now() + (60000 * 60 * 24 * 2)),
+    },
 });
 
 const flightSchema = new Schema({
@@ -30,7 +31,11 @@ const flightSchema = new Schema({
         min: 1,
         max: 9999
     },
-    departs: Date,
+    departs: {
+        type: Date,
+        // invoke this thing 
+        default: new Date(60000 * 60 * 24 * 365 + Date.now()),
+    },
     destinations: [destinationSchema]
 });
 
@@ -39,5 +44,6 @@ const flightSchema = new Schema({
 module.exports = {
     airlines,
     airports,
-    FlightModel: mongoose.model('Flight', flightSchema)
+    FlightModel: mongoose.model('Flight', flightSchema),
+    DestinationModel: mongoose.model('Destination', destinationSchema),
 };

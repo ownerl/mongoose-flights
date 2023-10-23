@@ -19,13 +19,17 @@ async function index(req,res) {
 async function newFlight(req,res) {
     const airlines = Flight.airlines;
     const airports = Flight.airports;
-    let nowDate = Date.now() + 60000 * 60 * 24 * 365;
-    nowDate = new Date(nowDate);
-    //console.log('tempdate here =========', nowDate);
+    const newFlight = new Flight.FlightModel();
+    const dt = newFlight.departs;
+    console.log(newFlight);
+    // Format the date for the value attribute of the input
+    let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
+    departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
+    console.log(departsDate);
     res.render('flights/new', {
         airlines,
         airports,
-        testdefined: nowDate
+        departsDate
     });
 }
 
@@ -43,10 +47,15 @@ async function create(req,res) {
 async function show(req,res) {
     const airlines = Flight.airlines;
     const airports = Flight.airports;
+    const newDestination = new Flight.DestinationModel();
+    const ddt = newDestination.arrival;
+    let destinationDate = `${ddt.getFullYear()}-${(ddt.getMonth() + 1).toString().padStart(2, '0')}`;
+    destinationDate += `-${ddt.getDate().toString().padStart(2, '0')}T${ddt.toTimeString().slice(0, 5)}`;
     const flight = await Flight.FlightModel.findById(req.params.flightId);
     res.render('flights/show', {
         airlines,
         airports,
         flight,
+        destinationDate,
     });
 }
