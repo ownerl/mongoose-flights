@@ -1,12 +1,29 @@
 const { Template } = require('ejs');
 const Flight = require('../models/flight');
 const { now } = require('mongoose');
+const Ticket = require('../models/ticket');
 
 module.exports = {
     index,
     new: newFlight,
     show,
     create,
+    newTicket,
+}
+
+async function newTicket(req,res) {
+    console.log(req.body)
+    const newTicket = {
+        seat: req.body.seat,
+        price: req.body.price,
+        flight: req.params.flightId,
+    }
+    try {
+        await Ticket.create(newTicket);
+        res.redirect(`/flights/${req.params.flightId}`)
+    } catch (err) {
+        res.redirect('/flights')
+    }
 }
 
 async function index(req,res) {
@@ -52,10 +69,16 @@ async function show(req,res) {
     let destinationDate = `${ddt.getFullYear()}-${(ddt.getMonth() + 1).toString().padStart(2, '0')}`;
     destinationDate += `-${ddt.getDate().toString().padStart(2, '0')}T${ddt.toTimeString().slice(0, 5)}`;
     const flight = await Flight.FlightModel.findById(req.params.flightId);
-    res.render('flights/show', {
-        airlines,
-        airports,
-        flight,
-        destinationDate,
-    });
+    const tickets = await Ticket.find({flight: flight._id});
+    if (flight) {
+        res.render('flights/show', {
+            tickets,
+            airlines,
+            airports,
+            flight,
+            destinationDate,
+        });
+    } else {
+        res.redirect('/flights');
+    }
 }

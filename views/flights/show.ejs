@@ -37,6 +37,21 @@
                 <input type="datetime-local" required name="arrival" value="<%= destinationDate %>">
             <button type="submit">Add Destination</button>
         </form>
+        <h3>Add Ticket</h3>
+        <form action="/flights/<%= flight._id %>/ticket" method="POST">
+            <label for="seat">Seat: </label>
+            <input id="seat" name="seat" required pattern="[A-F][1-9]\d?">
+            <label for="price">Price: </label>
+            <input id="price" name="price" type="number" min="0">
+            <button type="submit">Add</button>
+        </form>
+        <br>
+        <h3>All Tickets</h3>
+        <ul>
+            <% tickets.forEach(ticket => { %>
+                <li>Seat: <%= ticket.seat %> Price: <%= ticket.price %> - <form action="/flights/<%= flight._id %>/<%= ticket._id %>/delete"><button type="submit">Remove Ticket</button></form></li>
+            <% }) %>
+        </ul>
     </section>
 
 <%- include('../partials/footer') %>
