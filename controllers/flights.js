@@ -9,6 +9,12 @@ module.exports = {
     show,
     create,
     newTicket,
+    deleteTicket,
+}
+
+async function deleteTicket(req,res) {
+    const ticket = await Ticket.findOneAndDelete({ '_id': req.params.ticketId });
+    res.redirect(`/flights/${req.params.flightId}`);
 }
 
 async function newTicket(req,res) {
@@ -20,9 +26,9 @@ async function newTicket(req,res) {
     }
     try {
         await Ticket.create(newTicket);
-        res.redirect(`/flights/${req.params.flightId}`)
+        res.redirect(`/flights/${req.params.flightId}`);
     } catch (err) {
-        res.redirect('/flights')
+        res.redirect(`/flights/${req.params.flightId}`);
     }
 }
 

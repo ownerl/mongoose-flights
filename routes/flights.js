@@ -11,7 +11,7 @@ router.get('/:flightId', flightsController.show);
 // ticket post
 router.post('/:flightId/ticket', flightsController.newTicket);
 // ticket delete
-router.delete('/:flightId/:ticketId/delete', flightsController.deleteTicket);
+router.delete('/:flightId/:ticketId', flightsController.deleteTicket);
 // POST /flights/create
 router.post('/', flightsController.create);
 module.exports = router;

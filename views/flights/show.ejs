@@ -49,7 +49,7 @@
         <h3>All Tickets</h3>
         <ul>
             <% tickets.forEach(ticket => { %>
-                <li>Seat: <%= ticket.seat %> Price: <%= ticket.price %> - <form action="/flights/<%= flight._id %>/<%= ticket._id %>/delete"><button type="submit">Remove Ticket</button></form></li>
+                <li>Seat: <%= ticket.seat %> Price: <%= ticket.price %> - <form action="/flights/<%= flight._id %>/<%= ticket._id %>?_method=DELETE" method="POST"><button type="submit">Remove Ticket</button></form></li>
             <% }) %>
         </ul>
     </section>
